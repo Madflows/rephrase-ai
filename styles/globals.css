@@ -12,9 +12,6 @@ body {
 }
 
 
-button {
-  @apply ring-2 focus:ring-slate-800 focus:ring-offset-2 ;
-}
 
 .btn-primary{
   @apply bg-slate-800 text-slate-100;
@@ -26,5 +23,13 @@ button {
 
 
 input[type="text"], textarea {
-  @apply w-full p-4 border-slate-500 form-textarea bg-white outline-none focus:outline-none ring-offset-2 focus:ring-2 ring-slate-400 rounded-lg border-none;
+  @apply w-full p-4 border-slate-500  bg-white outline-none focus:outline-none ring-offset-2 focus:ring-2 ring-slate-400 rounded-lg border-none;
+}
+
+/* textarea {
+ @apply form-textarea;
+} */
+
+input {
+  @apply form-input;
 }

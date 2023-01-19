@@ -1,53 +1,73 @@
-import { Listbox, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from "@heroicons/react/20/solid";
+import { Fragment } from "react";
 import TONES from "@/utils/tones";
-import { IoChevronUp } from "react-icons/io5";
 
-const Dropdown = ({ selectedCharacter, setSelectedCharacter }) => {
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+
+
+// let tones = ["Professional", "Casual", "Funny"];
+
+export default function DropDown({ tone, setTone }) {
   return (
-    <Listbox value={selectedCharacter} onChange={setSelectedCharacter}>
-      {({ open }) => (
-        <>
-          <Listbox.Button
-            className={
-              "w-full bg-white rounded-md p-4 py-2 outline-none border-none focus:outline-none focus:border-none focus:ring-0 border border-gray-500 text-coolGray flex items-center justify-between"
-            }
-          >
-            <p>{selectedCharacter.name}</p>
-            <IoChevronUp />
-          </Listbox.Button>
-          <Transition
-            show={open}
-            enter="transition duration-100 ease-out"
-            enterFrom="transform scale-95 opacity-0"
-            enterTo="transform scale-100 opacity-100"
-            leave="transition duration-75 ease-out"
-            leaveFrom="transform scale-100 opacity-100"
-            leaveTo="transform scale-95 opacity-0"
-          >
-            <Listbox.Options static>
-              {TONES.map((tone, index) => (
-                <Listbox.Option
-                  onClick={(open = !open)}
-                  key={index}
-                  value={tone}
-                >
-                  {({ active }) => (
-                    <p
-                      className={`${
-                        active && "bg-slate-200"
-                      } text-coolGray font-sm py-2 px-4`}
-                    >
-                      {`${tone.name} from `} <span className="font-semibold">{`${tone.show}`}</span>
-                    </p>
-                  )}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </Transition>
-        </>
-      )}
-    </Listbox>
-  );
-};
+    <Menu as="div" className="relative block text-left w-full">
+      <div>
+        <Menu.Button className="inline-flex w-full justify-between items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
+          {tone.name}
+          <ChevronUpIcon
+            className="-mr-1 ml-2 h-5 w-5 ui-open:hidden"
+            aria-hidden="true"
+          />
+          <ChevronDownIcon
+            className="-mr-1 ml-2 h-5 w-5 hidden ui-open:block"
+            aria-hidden="true"
+          />
+        </Menu.Button>
+      </div>
 
-export default Dropdown;
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items
+          className="absolute left-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          key={tone.name}
+        >
+          <div className="">
+            {TONES.map((toneItem) => (
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={() => setTone(toneItem)}
+                    className={classNames(
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                      tone === toneItem ? "bg-gray-200" : "",
+                      "px-4 py-2 text-sm w-full text-left flex items-center space-x-2 justify-between"
+                    )}
+                  >
+                    <span>{toneItem.name} <span className="text-sm font-bold ml-3 text-gray-500">- {toneItem.show}</span></span>
+                    {tone === toneItem ? (
+                      <CheckIcon className="w-4 h-4 text-bold" />
+                    ) : null}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  );
+}

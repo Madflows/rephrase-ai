@@ -1,6 +1,6 @@
 import TONES from "@/utils/tones";
 import React, { useState, useEffect } from "react";
-import Dropdown from "./Dropdown";
+import DropDown from "./Dropdown";
 
 const FormSection = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(TONES[0]);
@@ -53,9 +53,9 @@ const FormSection = () => {
             </div>
             <div>Choose a tone.</div>
           </div>
-          <Dropdown
-            selectedCharacter={selectedCharacter}
-            setSelectedCharacter={setSelectedCharacter}
+          <DropDown
+            tone={selectedCharacter}
+            setTone={setSelectedCharacter}
           />
         </label>
 
