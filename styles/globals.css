@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+* {
+  font-family: 'Sofia Pro', sans-serif;
+}
+
+body {
+  @apply min-h-screen w-full bg-slate-100;
+}
+
+
+button {
+  @apply ring-2 focus:ring-slate-800 focus:ring-offset-2 ;
+}
+
+.btn-primary{
+  @apply bg-slate-800 text-slate-100;
+}
+
+.font-cubano {
+  font-family: "Cubano", sans-serif;
+}
+
+
+input[type="text"], textarea {
+  @apply w-full p-4 border-slate-500 form-textarea bg-white outline-none focus:outline-none ring-offset-2 focus:ring-2 ring-slate-400 rounded-lg border-none;
+}
