@@ -46,8 +46,8 @@ export default function DropDown({ tone, setTone }) {
           key={tone.name}
         >
           <div className="">
-            {TONES.map((toneItem) => (
-              <Menu.Item>
+            {TONES.map((toneItem, index) => (
+              <Menu.Item key={index}>
                 {({ active }) => (
                   <button
                     onClick={() => setTone(toneItem)}

@@ -4,31 +4,30 @@ import DropDown from "./Dropdown";
 
 const FormSection = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(TONES[0]);
+  const [bio, setBio] = useState('');
   const [result, setResult] = useState({})
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let formData = new FormData(e.currentTarget);
+  useEffect(() => {
+    let fin = { ...selectedCharacter, bio: bio };
 
-    let data = Object.fromEntries(formData);
+    setResult(fin);
+  }, [bio, selectedCharacter])
 
-    setResult({
-        ...data,
-        ...selectedCharacter
-    });
+  const handleSubmit = () => {
+    let fin = { ...selectedCharacter, bio: bio };
 
+    setResult(fin);
     console.log(result)
   };
 
   return (
     <div className="py-4">
-      <form
-        onSubmit={handleSubmit}
+      <div
         className="flex flex-col gap-4 w-full max-w-xl mx-auto"
       >
         <label className="w-full flex flex-col gap-4">
           <div className="flex items-center justify-start gap-4">
-            <div className="w-[30px] min-w-[30px] h-[30px] items-center justify-center flex rounded-full leading-none bg-black text-white">
+            <div className="w-[30px] min-w-[30px] h-[30px] items-center justify-center flex rounded-full leading-none bg-slate-900 text-white">
               1
             </div>
             <div>
@@ -40,6 +39,8 @@ const FormSection = () => {
           </div>
           <textarea
             name="bio"
+            value={bio}
+            onChange={(e) => setBio(e.currentTarget.value)}
             className="w-full"
             id="bio"
             cols="30"
@@ -48,7 +49,7 @@ const FormSection = () => {
         </label>
         <label className="w-full flex flex-col gap-4">
           <div className="flex items-center justify-start gap-4">
-            <div className="w-[30px] min-w-[30px] h-[30px] items-center justify-center flex rounded-full leading-none bg-black text-white">
+            <div className="w-[30px] min-w-[30px] h-[30px] items-center justify-center flex rounded-full leading-none bg-slate-900 text-white">
               2
             </div>
             <div>Choose a tone.</div>
@@ -59,10 +60,10 @@ const FormSection = () => {
           />
         </label>
 
-        <button className="w-full p-4 mt-[3rem] rounded-xl ring-4 transition ring-transparent focus:ring-slate-900 bg-slate-900 text-white ring-offset-8">
+        <button onClick={handleSubmit} className="w-full p-4 mt-[3rem] rounded-xl ring-4 transition ring-transparent focus:ring-slate-900 bg-slate-900 text-white ring-offset-2">
           Generate Bio
         </button>
-      </form>
+      </div>
     </div>
   );
 };
