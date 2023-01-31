@@ -13,7 +13,7 @@ const Navbar = () => {
         </Link>
 
         <Link href="https://vercel.app" target={"_blank"}>
-          <IoLogoVercel className="w-[30px] h-[30px]" />
+          <IoLogoVercel className="w-[25px] h-[25px]" />
         </Link>
       </div>
     </nav>
