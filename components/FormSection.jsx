@@ -1,21 +1,26 @@
 import { getBio } from "@/utils/functions";
 import TONES from "@/utils/tones";
 import React, { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { useQuery } from "react-query";
 import DropDown from "./Dropdown";
 import GeneratedBio from "./GeneratedBio";
+import Loader from "./Loader";
 
 const FormSection = () => {
   const [selectedCharacter, setSelectedCharacter] = useState(TONES[0]);
   const [bio, setBio] = useState("");
   const [result, setResult] = useState({});
-  const [allowFetch, setAllowFetch] = useState(false)
+  const [allowFetch, setAllowFetch] = useState(false);
+  const [generating, setGenerating] = useState(false);
 
-  const { data, isLoading, isError, error } = useQuery("bio", () =>
-    getBio(result)
-  , {
-    enabled: allowFetch
-  });
+  const { data, isLoading, isError, error } = useQuery(
+    "bio",
+    () => getBio(result),
+    {
+      enabled: allowFetch,
+    }
+  );
 
   useEffect(() => {
     let fin = { ...selectedCharacter, bio: bio };
@@ -24,18 +29,25 @@ const FormSection = () => {
   }, [bio, selectedCharacter]);
 
   useEffect(() => {
-    data && setAllowFetch(false)
-  }, [data])
+    data && setAllowFetch(false);
+    data && toast.success("Generated Bio");
+    data && setGenerating(false)
+  }, [data]);
   useEffect(() => {
-    error && setAllowFetch(false)
-  }, [error])
+    error && setAllowFetch(false);
+    error && toast.error("Error generating Bio");
+
+  }, [error]);
 
   const handleSubmit = () => {
+    setGenerating(true)
     let fin = { ...selectedCharacter, bio: bio };
 
     setResult(fin);
     console.log(result);
-    setAllowFetch(true)
+    setAllowFetch(true);
+
+    
   };
 
   return (
@@ -57,7 +69,7 @@ const FormSection = () => {
             name="bio"
             value={bio}
             onChange={(e) => setBio(e.currentTarget.value)}
-            className="w-full"
+            className="w-full text-slate-700 font-medium"
             id="bio"
             cols="30"
             rows="10"
@@ -75,9 +87,9 @@ const FormSection = () => {
 
         <button
           onClick={handleSubmit}
-          className="w-full p-4 mt-[1rem] rounded-xl ring-2 transition ring-transparent focus:ring-slate-900 bg-slate-900 text-white ring-offset-2"
+          className="w-full p-3 mt-[1rem] rounded-md ring-2 flex items-center justify-center transition ring-transparent focus:ring-slate-900 bg-slate-900 text-white ring-offset-2"
         >
-          Generate Bio
+          {generating ? <Loader text="Generating Bio" /> : "Generate Bio"}
         </button>
       </div>
 
@@ -90,5 +102,7 @@ const FormSection = () => {
     </div>
   );
 };
+
+
 
 export default FormSection;
