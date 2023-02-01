@@ -9,11 +9,11 @@ const Footer = () => {
         <p className="text-slate-800 font-normal">
           Powered by{" "}
           <Link
-            href={"https://openai.com"}
+            href={"https://openai.com/blog/gpt-3-apps/"}
             target="_blank"
             className="font-bold hover:underline"
           >
-            OpenAI
+            GPT-3
           </Link>{" "}
           and{" "}
           <Link
