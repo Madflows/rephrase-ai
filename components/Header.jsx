@@ -1,8 +1,24 @@
+import { useBioStore } from "@/store";
+import { db } from "@/utils/firebase";
+import { collection, doc, getDoc } from "firebase/firestore";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsGithub } from "react-icons/bs";
 
+
 const Header = () => {
+  const {setTotalBio, totalBio} = useBioStore();
+  const getTotalBios = async () => {
+    const biosCol = collection(db, "bios");
+    const docRef = doc(biosCol, "QvyrAlomYFk9pM5hiwi1");
+    const docSnap = await getDoc(docRef);
+    let data = docSnap.data();
+     setTotalBio(data.totalBios)
+    };
+    useEffect(() => {
+      getTotalBios()
+    }, [])
   return (
     <section className="flex flex-col items-start md:items-center gap-8">
       <Link
@@ -17,7 +33,8 @@ const Header = () => {
         Rephrase your Twitter bio in seconds
       </h3>
       <p className="text-coolGray text-lg">
-        <span className="font-semibold">18,167</span> bios rephrased so far.
+        <span className="font-semibold">{(totalBio)?.toLocaleString()}</span>{" "}
+        bios rephrased so far.
       </p>
     </section>
   );

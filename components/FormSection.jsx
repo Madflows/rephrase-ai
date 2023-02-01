@@ -1,4 +1,5 @@
-import { getBio } from "@/utils/functions";
+import { useBioStore } from "@/store";
+import { getBio, incrementBio } from "@/utils/functions";
 import TONES from "@/utils/tones";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
@@ -13,6 +14,8 @@ const FormSection = () => {
   const [result, setResult] = useState({});
   const [allowFetch, setAllowFetch] = useState(false);
   const [generating, setGenerating] = useState(false);
+
+  const {totalBio} = useBioStore();
 
   const { data, isLoading, isError, error } = useQuery(
     "bio",
@@ -32,6 +35,7 @@ const FormSection = () => {
     data && setAllowFetch(false);
     data && toast.success("Generated Bio");
     data && setGenerating(false)
+    data && incrementBio(totalBio)
   }, [data]);
   useEffect(() => {
     error && setAllowFetch(false);

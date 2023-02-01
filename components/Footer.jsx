@@ -5,7 +5,7 @@ import { FaGithub, FaTwitter } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className=" border-t-slate-200 pt-12">
-      <div className="max-w-6xl py-8 border-t-2 mx-auto flex flex-col md:flex-row items-center md:justify-between">
+      <div className="max-w-6xl py-8 border-t-2 mx-auto space-y-4 flex flex-col md:flex-row items-center md:justify-between">
         <p className="text-slate-800 font-normal">
           Powered by{" "}
           <Link
