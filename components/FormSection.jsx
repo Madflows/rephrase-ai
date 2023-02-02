@@ -73,10 +73,11 @@ const FormSection = () => {
             name="bio"
             value={bio}
             onChange={(e) => setBio(e.currentTarget.value)}
-            className="w-full text-slate-700 font-medium"
+            className="w-full text-slate-700 font-medium text-sm"
+            placeholder="e.g Web developer, AI enthusiast, and NextJS/Reactjs specialist. Constantly learning and exploring new technologies"
             id="bio"
-            cols="30"
-            rows="10"
+            cols="20"
+            rows="5"
           ></textarea>
         </label>
         <label className="w-full flex flex-col gap-4">
