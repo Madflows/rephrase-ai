@@ -10,6 +10,7 @@ export default function Document() {
         />
         <link href="https://fonts.cdnfonts.com/css/cubano" rel="stylesheet" />
         <link href="https://fonts.cdnfonts.com/css/linear" rel="stylesheet"></link>
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </Head>
       <body>
         <Main />

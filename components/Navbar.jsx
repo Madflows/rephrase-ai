@@ -8,10 +8,11 @@ const Navbar = () => {
     <nav className="w-full">
       <div className="w-full flex items-baseline justify-between py-4 px-6 max-w-6xl  border-b mx-auto">
         <Link href={"/"} target={"_blank"} className="flex items-center gap-2">
-          <Logo width={"35"} height={"35"} />
+          {/* <Logo width={"35"} height={"35"} />
           <h2 className="font-bold text-lg">
             Rephrase<span className="text-violet-600">AI</span>
-          </h2>
+          </h2> */}
+          <img src="/logo.svg" alt="rephrase.ai" width={150} />
         </Link>
 
         <Link href="https://vercel.app" target={"_blank"}>
