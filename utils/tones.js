@@ -1,6 +1,7 @@
 const TONES = [
   { name: "Rick", show: "Rick and Morty" },
   { name: "Peter", show: "Family Guy" },
+  { name: "Riley", show: "The Boondocks" },
   { name: "Andrew", show: "Big Mouth" },
   { name: "Stan", show: "American Dad" },
   { name: "Homer", show: "The Simpsons" },
